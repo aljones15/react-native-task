@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { RedditThunk, ChangeCards, GoToHistory } from './thunk.js';
 import { View, Text, Button, Image } from 'react-native';
 import styles from '../../Style/';
+import {NoCards, Card} from './Card/';
 
 const { column, container, center, inputStyle, spacerStyle } = styles;
-
+/*
 const NoCards = (props) => {
   return(
     <View style={spacerStyle}>
@@ -31,7 +32,7 @@ const Card = ({data}) => {
     </View>
   )
 }
-
+*/
 class Cards extends Component {
   componentWillMount(){
     let url = 'https://www.reddit.com/r/aww.json';
