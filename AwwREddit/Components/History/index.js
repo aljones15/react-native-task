@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {View, Text, Button} from 'react-native';
+import {View, Text, Button, ListView, ActivityIndicator } from 'react-native';
 import styles from '../../Style/';
 import GoCards from './thunk.js';
 
-const { container, center, inputStyle, spacerStyle } = styles;
+const { container, column, center, inputStyle, spacerStyle } = styles;
+
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class History extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      cards: ds.cloneWithRows(this.props.cards)
+    }
+  }
   render(){
     return(
       <View style={container}>
@@ -16,8 +24,13 @@ class History extends Component {
           </Text>
           <Button onPress={() => this.props.goToCards()} title='Cards' />
         </View>
-        <View style={[spacerStyle, {flex:25}]}>
-        <Text style={center}>History</Text>
+        <View style={[spacerStyle, column, {flex:25}]}>
+        <Text>History</Text>
+        <ListView
+          dataSource={this.state.cards}
+          renderRow={(card) => <Text style={{flex: 1}}>card {card.yes} {card.data.url}</Text>}
+          style={{marginTop: 5}}
+        />
         </View>
       </View>
    )
