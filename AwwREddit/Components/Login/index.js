@@ -43,7 +43,8 @@ class Login extends Component {
         />
         <TextInput
           onChangeText={(text) => this.handleChange('password', text)} 
-          clearTextOnFocus={true} 
+          clearTextOnFocus={true}
+          secureTextEntry={true} 
           style={[styles.center, styles.inputStyle]} 
           value={this.state.password}
         />
