@@ -18,15 +18,16 @@ const NoCards = (props) => {
 const Card = ({data}) => {
   console.log('Card -> props');
   const unsafe = /^https?/;
-  const url = data.url.replace(unsafe, 'https');
+  const gifv = /\.gifv$/;
+  const url = data.url.replace(unsafe, 'https').replace(gifv, '.gif');
   console.log(url);
   return(
-    <View style={spacerStyle}>
+    <View style={spacerStyle, {flexDirection: 'column'}}>
       <Image
-        style={[spacerStyle]}
+        style={{width: 200, height: 200}} 
         source={{uri: url}}
       />
-      <Text>Card</Text>
+      <Text style={{textAlign: 'center'}}>Card</Text>
     </View>
   )
 }
