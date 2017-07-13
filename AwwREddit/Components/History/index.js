@@ -28,7 +28,11 @@ class History extends Component {
         <Text>History</Text>
         <ListView
           dataSource={this.state.cards}
-          renderRow={(card) => <Text style={{flex: 1}}>card {card.yes} {card.data.url}</Text>}
+          renderRow={(card) => <Text 
+            style={{flex: 1}}> card 
+            {card.yes} 
+            {card.data.url}</Text>
+          }
           style={{marginTop: 5}}
         />
         </View>
