@@ -10,8 +10,6 @@ const Section = (props) => <View><Text>Switcher</Text></View>
 
 class Switcher extends Component {
   componentDidMount(){
-    console.log('Switcher -> Props');
-    console.log(this.props);
   }
   render(){
     const {section} = this.props;

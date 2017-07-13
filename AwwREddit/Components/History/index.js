@@ -1,35 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {View, Text, Button} from 'react-native';
+import styles from '../../Style/';
 
-const container = {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'column',
-    backgroundColor: '#F5FCFF',
-};
-
-const center = {
-  flex: 3,
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  flexDirection: 'row'
-};
-
-const inputStyle = {
-  flex: 5, 
-  borderColor: 'gray', 
-  borderWidth: 1
-};
-
-const spacerStyle = {
-  flex: 10,
-  borderWidth: 0,
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'row'
-};
+const { container, center, inputStyle, spacerStyle } = styles;
 
 class History extends Component {
   render(){

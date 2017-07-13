@@ -2,35 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TextInput, Button } from 'react-native';
 import Submit from './thunk.js';
-
-const container = {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'column',
-    backgroundColor: '#F5FCFF',
-};
-
-const center = {
-  flex: 3,
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  flexDirection: 'row'
-};
-
-const inputStyle = {
-  flex: 5, 
-  borderColor: 'gray', 
-  borderWidth: 1
-};
-
-const spacerStyle = {
-  flex: 10,
-  borderWidth: 0,
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'row'
-};
+import styles from '../../Style/';
 
 class Login extends Component {
   constructor(props){
@@ -41,11 +13,7 @@ class Login extends Component {
       error: ''
     };
   }
-  componentDidMount(){
-    console.log('Login -> Props');
-    console.log(this.props);
-    console.log('Login -> state');
-    console.log(this.state);
+  componentDidMount(){ 
   }
   handleChange(section, text){
       this.state[section] = text;
@@ -62,29 +30,29 @@ class Login extends Component {
   }
   render(){
     return(
-      <View style={container}>
-        <View style={[spacerStyle, {flex: 3}]} />
-        <Text style={[center]}>
+      <View style={styles.column}>
+        <View style={[styles.spacerStyle, {flex: 3}]} />
+        <Text style={[styles.center]}>
           Login
         </Text>
         <TextInput 
           onChangeText={(text) => this.handleChange('username', text)}
           clearTextOnFocus={true} 
-          style={[center,inputStyle]} 
+          style={[styles.center,styles.inputStyle]} 
           value={this.state.username} 
         />
         <TextInput
           onChangeText={(text) => this.handleChange('password', text)} 
           clearTextOnFocus={true} 
-          style={[center,inputStyle]} 
+          style={[styles.center, styles.inputStyle]} 
           value={this.state.password}
         />
         <Button
           onPress={() => this.login() }
-          style={center}
+          style={styles.center}
            title='Submit'
          />
-        <View style={spacerStyle}>
+        <View style={styles.spacerStyle}>
           <Text style={{color: 'red'}}>{this.state.error}</Text>
         </View>
       </View>
