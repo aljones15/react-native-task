@@ -21,7 +21,7 @@ const Card = ({data}) => {
   const url = data.url.replace(unsafe, 'https');
   console.log(url);
   return(
-    <View style={column}>
+    <View style={spacerStyle}>
       <Image
         style={[spacerStyle]}
         source={{uri: url}}
@@ -35,7 +35,7 @@ class Cards extends Component {
   componentWillMount(){
     let url = 'https://www.reddit.com/r/aww.json';
     const limit = 10;
-    url = url + '?limit=1';
+    url = url + '?limit=' + limit;
     this.props.getCards(url);
   }
   componentDidUpdate(){
@@ -56,11 +56,13 @@ class Cards extends Component {
   render(){
     return(
       <View style={column}>
-        <View style={spacerStyle}>
-          <Text>{this.props.username} | </Text>
+        <View style={[spacerStyle,{flex: 3}]}>
+          <Text>
+            {this.props.username ? this.props.username : 'not_logged_id'} | 
+          </Text>
           <Button onPress={() => this.props.switchView()} title='History' />
         </View>
-        <View style={container}>
+        <View style={[container,{flex: 25}]}>
           <SwipeCards
             cards={this.props.cards}
             renderCard={(card) => <Card {...card} /> }
