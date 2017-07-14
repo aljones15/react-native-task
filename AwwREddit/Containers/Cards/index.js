@@ -47,11 +47,16 @@ class Cards extends Component {
     }
     return(
       <View style={column}>
+        <View style={column}>
+          <Text style={{textAlign: 'center', marginTop: 32}}>Viewing: Reddit Aww</Text>
+        </View>
         <View style={[spacerStyle,{flex: 3}]}>
-          <Text>
-            {this.props.username ? this.props.username : 'not_logged_id'} | 
+          <Text> Username: 
+            {this.props.username ? ' ' + this.props.username : ' not_logged_id'} | 
           </Text>
-          <Button onPress={() => this.props.switchView()} title='History' />
+          <Button 
+            onPress={() => this.props.switchView()} 
+            title='Go To History' />
         </View>
         <View style={[container,{flex: 25}]}>
           <SwipeCards

@@ -34,7 +34,8 @@ class History extends Component {
       <View style={container}>
         <View style={[spacerStyle, {flex: 3}]}>
           <Text>
-            {this.props.username ? this.props.username : 'not_logged_in'} | 
+            Username:
+            {this.props.username ? ' ' + this.props.username : ' not_logged_in'} | 
           </Text>
           <Button onPress={() => this.props.goToCards()} title='Cards' />
         </View>
