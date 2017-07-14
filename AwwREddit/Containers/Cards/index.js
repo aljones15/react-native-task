@@ -51,7 +51,7 @@ class Cards extends Component {
           <SocialIcon
             iconSize={35}
             type='reddit'
-            backgroundColor='#1F1F1F'
+            backgroundColor='#1F1F1FF0'
           />
           <Text> 
             r/aww
