@@ -2,37 +2,12 @@ import React, { Component } from 'react';
 import SwipeCards from 'react-native-swipe-cards';
 import { connect } from 'react-redux';
 import { RedditThunk, ChangeCards, GoToHistory } from './thunk.js';
-import { View, Text, Button, Image } from 'react-native';
+import { View, Text, Button, Image, ActivityIndicator } from 'react-native';
 import styles from '../../Style/';
-import {NoCards, Card} from './Card/';
+import { NoCards, Card } from '../../Components/Card/';
 
 const { column, container, center, inputStyle, spacerStyle } = styles;
-/*
-const NoCards = (props) => {
-  return(
-    <View style={spacerStyle}>
-      <Text>No More Cards</Text>
-    </View>
-  )
-}
 
-const Card = ({data}) => {
-  console.log('Card -> props');
-  const unsafe = /^https?/;
-  const gifv = /\.gifv$/;
-  const url = data.url.replace(unsafe, 'https').replace(gifv, '.gif');
-  console.log(url);
-  return(
-    <View style={spacerStyle, {flexDirection: 'column'}}>
-      <Image
-        style={{width: 200, height: 200}} 
-        source={{uri: url}}
-      />
-      <Text style={{textAlign: 'center'}}>Card</Text>
-    </View>
-  )
-}
-*/
 class Cards extends Component {
   componentWillMount(){
     let url = 'https://www.reddit.com/r/aww.json';
@@ -42,20 +17,34 @@ class Cards extends Component {
   }
   componentDidUpdate(){
   }
+  componentWillUnmount(){
+    console.log('Cards -> Will Unmount -> update cards');
+    this.props.updateCards(this.props.cards);
+  }
   yes(card){
+    console.log('Card -> yes ->');
+    console.log(card);
     card.yes = true;
     card.no = false;
   }
   no(card){
+    console.log('Card -> no ->');
+    console.log(card); 
     card.yes = false;
     card.no = true;
   }
-  maybe(card){
-    card.maybe = true;
-    card.no = false,
-    card.yes = false;
-  }
   render(){
+    if(this.props.loading){
+      return(
+        <View style={column}>
+          <View style={[spacerStyle, {flex: 5}]} />
+          <ActivityIndicator style={spacerStyle} />
+          <Text style={{flex: 3, textAlign: 'center'}}>
+            Fetching Cute Pics
+          </Text>
+        </View>
+      )
+    }
     return(
       <View style={column}>
         <View style={[spacerStyle,{flex: 3}]}>
@@ -71,7 +60,6 @@ class Cards extends Component {
             renderNoMoreCards = {() => <NoCards /> }
             handleYup={this.yes}
             handleNope={this.no}
-            handleMaybe={this.maybe}
           />
         </View>
       </View>
@@ -87,7 +75,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatch = (dispatch) =>({
   switchView: (view) => dispatch(GoToHistory()),
   updateCards: (cards) => dispatch(ChangeCards(cards)),
-  getCards: (url) => { console.log('getCards -> Url ' + url); dispatch(RedditThunk(url)) } 
+  getCards: (url) => dispatch(RedditThunk(url)) 
 })
 
 export default connect(mapStateToProps, mapDispatch)(Cards);

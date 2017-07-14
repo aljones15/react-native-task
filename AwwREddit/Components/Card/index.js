@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, ActivityIndicator } from 'react-native';
-import styles from '../../../Style/';
+import styles from '../../Style/';
 import Image from 'react-native-image-progress';
 
 const { column, container, center, inputStyle, spacerStyle } = styles;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {View, Text, Button, ListView, ActivityIndicator } from 'react-native';
 import styles from '../../Style/';
 import GoCards from './thunk.js';
+import { Card } from '../Card/';
 
 const { container, column, center, inputStyle, spacerStyle } = styles;
 
@@ -14,6 +15,19 @@ class History extends Component {
     this.state = {
       cards: ds.cloneWithRows(this.props.cards)
     }
+  }
+  componentDidMount(){
+    console.log('History -> props');
+    console.log(this.props);
+  }
+  YesOrNo(card){
+    if(card.yes && !card.no){
+      return "YES";
+    }
+    if(!card.yes && !card.no){
+      return "UNDECIDED";
+    }
+    return "NO";
   }
   render(){
     return(
@@ -28,11 +42,16 @@ class History extends Component {
         <Text>History</Text>
         <ListView
           dataSource={this.state.cards}
-          renderRow={(card) => <Text 
-            style={{flex: 1}}> card 
-            {card.yes} 
-            {card.data.url}</Text>
-          }
+          renderRow={(card) =>{
+            return(
+              <View>
+                <Card {...card} />
+                <Text style={{textAlign: 'center'}}>
+                 {this.YesOrNo(card)}
+                </Text>
+              </View>
+            );
+          }} 
           style={{marginTop: 5}}
         />
         </View>
