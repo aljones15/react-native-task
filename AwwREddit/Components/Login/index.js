@@ -1,62 +1,84 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View  } from 'react-native';
 import Submit from './thunk.js';
 import styles from '../../Style/';
+import {
+  Text, 
+  FormLabel, 
+  FormInput, 
+  FormValidationMessage,
+  Button
+} from 'react-native-elements';
 
 class Login extends Component {
   constructor(props){
     super(props);
     this.state = {
-      username: 'UserName',
+      username: '',
       password: 'Password',
-      error: ''
+      error: {username: [], password: []}
     };
   }
   componentDidMount(){ 
   }
   handleChange(section, text){
       this.state[section] = text;
-      this.state.error = '';
+      this.state.error[section] = [];
       this.setState(Object.assign({}, this.state));
   }
   login(){
     if(this.state.password === 'password'){
       this.props.login(this.state);
     } else {
-      this.state.error = "Incorrect Password";
-      this.setState(this.state);
+      // this is just so I can support more errors in the future
+      this.state.error.password = ["Incorrect Password"];
     }
+    if(!this.state.username){
+      this.state.error.username = ["Username Required"];
+    }
+    this.setState(this.state);
   }
   render(){
     return(
       <View style={styles.column}>
         <View style={[styles.spacerStyle, {flex: 3}]} />
-        <Text style={[styles.center]}>
+        <Text h4 style={[styles.center]}>
           Login
         </Text>
-        <TextInput 
-          onChangeText={(text) => this.handleChange('username', text)}
+        <View style={{flex: 20}}>
+        <FormLabel>User Name</FormLabel>
+        <FormInput
           clearTextOnFocus={true} 
-          style={[styles.center,styles.inputStyle]} 
-          value={this.state.username} 
-        />
-        <TextInput
+          onChangeText={(text) => this.handleChange('username', text)}
+         />
+         { this.state.error.username.map((e, index) => {
+           return(
+             <FormValidationMessage key={'error_username_' + index}>
+                 {e}
+             </FormValidationMessage>);
+         })}
+       <FormLabel>Password</FormLabel>
+       <FormInput
           onChangeText={(text) => this.handleChange('password', text)} 
           clearTextOnFocus={true}
           secureTextEntry={true} 
-          style={[styles.center, styles.inputStyle]} 
           value={this.state.password}
         />
+         { this.state.error.password.map((e, index) => {
+           return(
+             <FormValidationMessage key={'error_password_' + index} >
+                    {e}
+            </FormValidationMessage>);
+         })} 
         <Button
           onPress={() => this.login() }
-          style={styles.center}
-           title='Submit'
+          style={{marginTop: 20}}
+          backgroundColor='#008F0F'
+          title='Submit'
          />
-        <View style={styles.spacerStyle}>
-          <Text style={{color: 'red'}}>{this.state.error}</Text>
         </View>
-      </View>
+     </View>
     )
   }
 }

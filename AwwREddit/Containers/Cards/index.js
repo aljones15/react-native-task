@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import SwipeCards from 'react-native-swipe-cards';
 import { connect } from 'react-redux';
 import { RedditThunk, ChangeCards, GoToHistory } from './thunk.js';
-import { View, Text, Button, Image, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import styles from '../../Style/';
 import { NoCards, Card } from '../../Components/Card/';
-
-const { column, container, center, inputStyle, spacerStyle } = styles;
+import { SocialIcon, Button, Text, Icon } from 'react-native-elements'
+const { 
+  column, container, center, 
+  viewCenter, inputStyle, spacerStyle 
+} = styles;
 
 class Cards extends Component {
   componentWillMount(){
@@ -22,14 +25,10 @@ class Cards extends Component {
     this.props.updateCards(this.props.cards);
   }
   yes(card){
-    console.log('Card -> yes ->');
-    console.log(card);
     card.yes = true;
     card.no = false;
   }
   no(card){
-    console.log('Card -> no ->');
-    console.log(card); 
     card.yes = false;
     card.no = true;
   }
@@ -39,7 +38,7 @@ class Cards extends Component {
         <View style={column}>
           <View style={[spacerStyle, {flex: 5}]} />
           <ActivityIndicator style={spacerStyle} />
-          <Text style={{flex: 3, textAlign: 'center'}}>
+          <Text h4 style={{flex: 3, textAlign: 'center'}}>
             Fetching Cute Pics
           </Text>
         </View>
@@ -47,16 +46,28 @@ class Cards extends Component {
     }
     return(
       <View style={column}>
-        <View style={column}>
-          <Text style={{textAlign: 'center', marginTop: 32}}>Viewing: Reddit Aww</Text>
-        </View>
-        <View style={[spacerStyle,{flex: 3}]}>
-          <Text> Username: 
-            {this.props.username ? ' ' + this.props.username : ' not_logged_id'} | 
+        <View 
+          style={[viewCenter, {flexDirection: 'row', marginTop: 15}]}>
+          <SocialIcon
+            iconSize={35}
+            type='reddit'
+            backgroundColor='#1F1F1F'
+          />
+          <Text> 
+            r/aww
           </Text>
-          <Button 
+          <Icon 
+            name='person'
+            type='fontawesome'
+          />
+          <Text> 
+            { this.props.username ?
+              this.props.username : ' not_logged_id'}   
+          </Text>
+          <Button
+            small 
             onPress={() => this.props.switchView()} 
-            title='Go To History' />
+            title='History' />
         </View>
         <View style={[container,{flex: 25}]}>
           <SwipeCards

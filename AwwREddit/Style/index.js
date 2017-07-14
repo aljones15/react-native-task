@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  viewCenter: {
+    flex: 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
   center: {
     flex: 3,
     alignItems: 'center',
