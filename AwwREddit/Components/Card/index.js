@@ -37,7 +37,7 @@ export class Card extends Component {
         source={{uri: url}}
         indicator={ActivityIndicator}         
       />
-      <Text style={{textAlign: 'center'}}>Card</Text>
+      <Text style={{textAlign: 'center'}}>{data.title}</Text>
     </View>
    )
   }
