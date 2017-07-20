@@ -21,7 +21,6 @@ class Cards extends Component {
   componentDidUpdate(){
   }
   componentWillUnmount(){
-    console.log('Cards -> Will Unmount -> update cards');
     this.props.updateCards(this.props.cards);
   }
   yes(card){
@@ -71,7 +70,7 @@ class Cards extends Component {
         </View>
         <View style={[container,{flex: 25}]}>
           <SwipeCards
-            cards={this.props.cards}
+            cards={this.props.cards.filter((c) => !c.yes && !c.no)}
             renderCard={(card) => <Card {...card} /> }
             renderNoMoreCards = {() => <NoCards /> }
             handleYup={this.yes}

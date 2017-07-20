@@ -31,13 +31,34 @@ export class Card extends Component {
    const gifv = /\.gifv$/;
    const url = data.url.replace(unsafe, 'https').replace(gifv, '.gif');
    return(
-    <View style={spacerStyle, {flexDirection: 'column'}}>
+    <View style={spacerStyle, 
+      {
+        flexDirection: 'column',
+        borderWidth: 2,
+        borderStyle: 'solid',
+        padding: 5
+      }
+    }>
       <Image
         style={{width: 300, height: 300}} 
         source={{uri: url}}
         indicator={ActivityIndicator}         
       />
-      <Text style={{textAlign: 'center'}}>{data.title}</Text>
+      <View style={
+        {
+          flexDirection: 'column',
+          borderWidth: 2,
+          borderStyle: 'solid',
+          borderColor: '#555555',
+          padding: 5,
+          marginTop: 5
+        }
+      }>
+        <Text 
+          style={{alignSelf: 'center', textAlign: 'center'}}>
+          {data.title}
+        </Text>
+      </View>
     </View>
    )
   }
