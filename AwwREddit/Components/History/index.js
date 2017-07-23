@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {View, Text, Button, ListView, ActivityIndicator } from 'react-native';
+import { View, Text, Button, 
+  ListView, ActivityIndicator } from 'react-native';
 import styles from '../../Style/';
 import GoCards from './thunk.js';
 import { Card } from '../Card/';
+import Icon from 'react-native-vector-icons/Entypo';
 
 const { container, column, center, inputStyle, spacerStyle } = styles;
 
@@ -22,12 +24,12 @@ class History extends Component {
   }
   YesOrNo(card){
     if(card.yes && !card.no){
-      return "YES";
+      return(<Icon name='thumbs-up' size={30} color='#00FF10FF' />);
     }
     if(!card.yes && !card.no){
-      return "UNDECIDED";
+      return(<Icon name='hand' size={30} color='#0000FFFF' />);
     }
-    return "NO";
+      return(<Icon name='thumbs-down' size={30} color='#FF0000FF' />);
   }
   render(){
     return(

@@ -36,7 +36,9 @@ export class Card extends Component {
         flexDirection: 'column',
         borderWidth: 2,
         borderStyle: 'solid',
-        padding: 5
+        padding: 5,
+        margin: 3,
+        alignItems: 'center'
       }
     }>
       <Image

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const makeColor = (r, g, b, alpha) => `#${r}${g}${b}${alpha}`;
+export const makeColor = (r, g, b, alpha) => `#${r}${g}${b}${alpha}`;
 
 const styles = StyleSheet.create({
   container: {

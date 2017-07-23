@@ -5,16 +5,7 @@ import Submit from './thunk.js';
 import styles from '../../Style/';
 import { Text, FormLabel, FormInput, 
   FormValidationMessage, Button } from 'react-native-elements';
-
-const makeColor = (r, g, b, alpha) => `#${r}${g}${b}${alpha}`;
-const loginBgColor = makeColor('02','0F','8F','1F');
-const formBg = makeColor('FF','FF','FF','70');
-const formBorder = {
-  borderWidth: 1,
-  borderColor: loginBgColor,
-  borderStyle: 'solid',
-  backgroundColor: formBg
-};
+import {loginBgColor, formBorder} from './style.js';
 
 class Login extends Component {
   constructor(props){
