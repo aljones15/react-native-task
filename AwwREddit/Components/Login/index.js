@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 import { View  } from 'react-native';
 import Submit from './thunk.js';
 import styles from '../../Style/';
-import {
-  Text, 
-  FormLabel, 
-  FormInput, 
-  FormValidationMessage,
-  Button
-} from 'react-native-elements';
+import { Text, FormLabel, FormInput, 
+  FormValidationMessage, Button } from 'react-native-elements';
+
+const makeColor = (r, g, b, alpha) => `#${r}${g}${b}${alpha}`;
+const loginBgColor = makeColor('02','0F','8F','1F');
+const formBg = makeColor('FF','FF','FF','70');
+const formBorder = {
+  borderWidth: 1,
+  borderColor: loginBgColor,
+  borderStyle: 'solid',
+  backgroundColor: formBg
+};
 
 class Login extends Component {
   constructor(props){
@@ -41,12 +46,13 @@ class Login extends Component {
   }
   render(){
     return(
-      <View style={styles.column}>
+      <View style={[styles.column,{backgroundColor: loginBgColor}]}>
         <View style={[styles.spacerStyle, {flex: 3}]} />
         <Text h4 style={[styles.center]}>
           Login
         </Text>
-        <View style={{flex: 20}}>
+        <View style={[{flex: 20}]}>
+        <View style={[{flex: 2},formBorder]}>
         <FormLabel>User Name</FormLabel>
         <FormInput
           clearTextOnFocus={true} 
@@ -58,6 +64,7 @@ class Login extends Component {
                  {e}
              </FormValidationMessage>);
          })}
+       <View style={{flex: 1}} />
        <FormLabel>Password</FormLabel>
        <FormInput
           onChangeText={(text) => this.handleChange('password', text)} 
@@ -67,16 +74,25 @@ class Login extends Component {
         />
          { this.state.error.password.map((e, index) => {
            return(
-             <FormValidationMessage key={'error_password_' + index} >
+             <View key={'pass_view_' + index} style={{flex: 1}}>
+             <FormValidationMessage 
+               key={'error_password_' + index} >
                     {e}
-            </FormValidationMessage>);
-         })} 
+            </FormValidationMessage>
+            </View>
+            );
+         })}
+        <View style={{flex: 1}} />
+        <View style={{flex: 1}} />
+        </View>
+        <View style={{flex: 3}}>
         <Button
           onPress={() => this.login() }
           style={{marginTop: 20}}
           backgroundColor='#008F0F'
           title='Submit'
          />
+        </View>
         </View>
      </View>
     )
